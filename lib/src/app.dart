@@ -6,6 +6,7 @@ import 'package:pingo_assignment_app/src/common/theme/theme_helper.dart';
 import 'package:pingo_assignment_app/src/core/providers/auth_provider.dart';
 import 'package:pingo_assignment_app/src/features/home/data/repository/news_repo.dart';
 import 'package:pingo_assignment_app/src/navigation/router.dart';
+import 'package:pingo_assignment_app/src/services/firebase_remote_config_service.dart';
 import 'package:provider/provider.dart';
 
 class App extends StatefulWidget {
@@ -29,6 +30,12 @@ class _AppState extends State<App> {
         ),
         Provider<NewsRepo>(
           create: (context) => NewsRepo(),
+        ),
+        Provider<NewsRepo>(
+          create: (context) => NewsRepo(),
+        ),
+        Provider<FirebaseRemoteConfigService>(
+          create: (_) => FirebaseRemoteConfigService()..initialize(),
         ),
       ],
       child: MaterialApp.router(

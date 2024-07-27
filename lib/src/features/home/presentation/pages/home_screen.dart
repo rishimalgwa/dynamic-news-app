@@ -7,6 +7,7 @@ import 'package:pingo_assignment_app/src/features/home/data/model/news_response.
 import 'package:pingo_assignment_app/src/features/home/data/repository/news_repo.dart';
 import 'package:pingo_assignment_app/src/features/home/presentation/widgets/news_card.dart';
 import 'package:pingo_assignment_app/src/navigation/router.dart';
+import 'package:pingo_assignment_app/src/services/firebase_remote_config_service.dart';
 import 'package:provider/provider.dart';
 
 @RoutePage()
@@ -21,13 +22,19 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final newsRepo = Provider.of<NewsRepo>(context);
+    final remoteConfigService =
+        Provider.of<FirebaseRemoteConfigService>(context);
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ThemeHelper.primaryColor,
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text("MyNews", style: ThemeHelper.appBarBoldTextStyle),
+          child: GestureDetector(
+              onTap: () {
+                remoteConfigService.fetchAndActivate();
+              },
+              child: Text("MyNews", style: ThemeHelper.appBarBoldTextStyle)),
         ),
         leadingWidth: 120,
         actions: [
@@ -47,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Icon(Icons.near_me, color: ThemeHelper.white),
                   Text(
-                    'IN',
+                    remoteConfigService.countryCode,
                     style: ThemeHelper.subheadingMediumTextStyle.copyWith(
                         color: ThemeHelper.white, fontWeight: FontWeight.bold),
                   )
@@ -66,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Text("Top Headlines", style: ThemeHelper.headingBoldTextStyle),
             Expanded(
               child: FutureBuilder<NewsResponse?>(
-                future: newsRepo.getNews('us'),
+                future: newsRepo.getNews(remoteConfigService.countryCode),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const LoadingWidget();

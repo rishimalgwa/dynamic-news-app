@@ -5,6 +5,7 @@ import 'package:pingo_assignment_app/firebase_options.dart';
 import 'package:pingo_assignment_app/src/app.dart';
 import 'package:pingo_assignment_app/src/common/di/di.dart';
 import 'package:pingo_assignment_app/src/navigation/router.dart';
+import 'package:pingo_assignment_app/src/services/firebase_remote_config_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,6 +16,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+  await FirebaseRemoteConfigService().initialize();
   runApp(const App());
 }
