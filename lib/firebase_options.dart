@@ -65,4 +65,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'pingo-learn-assignment.appspot.com',
     iosBundleId: 'in.pingolearn.assignmentapp',
   );
+
 }

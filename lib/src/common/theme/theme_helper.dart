@@ -36,12 +36,12 @@ class ThemeHelper {
           .fontFamily);
   static TextStyle appBarBoldTextStyle = TextStyle(
       color: white,
-      fontSize: 16,
+      fontSize: 18,
       fontFamily: GoogleFonts.encodeSansExpanded(fontWeight: FontWeight.bold)
           .fontFamily);
   static TextStyle headingBoldTextStyle = TextStyle(
       color: black,
-      fontSize: 16,
+      fontSize: 18,
       fontFamily: GoogleFonts.encodeSansExpanded(fontWeight: FontWeight.bold)
           .fontFamily);
   static TextStyle subheadingMediumTextStyle = TextStyle(
